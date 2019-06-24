@@ -26,12 +26,37 @@
      </delete>
     <!--根据id查找数据回显前端页面-->
     <select id="findByCheckItemId" parameterType="int" resultType="com.itheima.pojo.CheckItem">
-        SELECT * FROM t_checkitem WHERE id=${id}
+        SELECT * FROM t_checkitem WHERE id = #{id}
     </select>
     <!--修改检查组-->
     <update id="update" parameterType="com.itheima.pojo.CheckItem">
-        UPDATE t_checkitem SET code = #{code} AND name=#{name} AND
-        sex = #{sex}  AND = #{age} AND price = #{price} AND type =#{type} AND remark = #{remark} AND attention = #{attention}
-        WHERE id =  #{id}
+        UPDATE t_checkitem
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 </mapper>

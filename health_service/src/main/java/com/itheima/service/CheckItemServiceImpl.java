@@ -62,7 +62,7 @@ public class CheckItemServiceImpl implements CheckItemService {
     }
 
     /**
-     * 查询修改检查项
+     * 查询修改检查项数据回显
      * @param id
      */
     @Override

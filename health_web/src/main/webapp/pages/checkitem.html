@@ -241,6 +241,7 @@
                             if (!result.data.flag) {
                                 //修改失败，弹出错误提示信息
                                 this.$message.error(result.data.message);
+                                this.dialogFormVisible4Edit = false;
                             }else {
                                 //修改成功，弹出成功提示信息
                                 this.$message({
@@ -310,14 +311,14 @@
             // 弹出编辑窗口
             handleUpdate(row) {
                 this.dialogFormVisible4Edit = true;
-                axios.get("/checkitem/findById?id" + row.id).then((result) => {
+                axios.get("/checkitem/findById.do?id="+row.id).then((result) => {
                     if (result.data.flag) {
                         this.formData = result.data.data;
                     } else {
                         this.$message.error(result.data.message);
+                        this.dialogFormVisible4Edit = false;
                     }
-                })
-
+                });
 
             },
             //切换页码
@@ -327,6 +328,7 @@
             },
             // 删除
             handleDelete(row) {
+                //弹出提示框提示
                 this.$confirm("确认删除当前选中记录吗？", "提示", {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',

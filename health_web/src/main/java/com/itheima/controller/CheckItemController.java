@@ -34,7 +34,6 @@ public class CheckItemController {
      */
     @RequestMapping("/add")
     public Result add(@RequestBody CheckItem checkItem) {
-        System.out.println(checkItem);
         try {
             checkItemService.add(checkItem);
 
@@ -44,12 +43,22 @@ public class CheckItemController {
         return new Result(true, MessageConstant.ADD_CHECKGROUP_SUCCESS);
     }
 
+    /**
+     * 分页查询
+     * @param queryPageBean
+     * @return
+     */
     @RequestMapping("/findPage")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
         PageResult pageResult = checkItemService.pageQuery(queryPageBean.getCurrentPage(), queryPageBean.getPageSize(), queryPageBean.getQueryString());
         return pageResult;
     }
 
+    /**
+     * 删除检查组
+     * @param id
+     * @return
+     */
     @RequestMapping("/delete")
     public Result delete(Integer id) {
         try {
@@ -72,10 +81,11 @@ public class CheckItemController {
     public Result findById(Integer id){
         try{
             CheckItem checkItem = checkItemService.findByCheckItemId(id);
+
+            return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItem);
         }catch(Exception e){
             return new Result(false,MessageConstant.QUERY_CHECKITEM_FAIL);
         }
-        return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS);
     }
 
     /**
